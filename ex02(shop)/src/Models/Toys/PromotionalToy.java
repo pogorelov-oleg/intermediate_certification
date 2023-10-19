@@ -12,7 +12,7 @@ public class PromotionalToy extends Toy {
         this.promoCount = promoCount;
         this.frequency = frequency;
         if (frequency < 0 & frequency >= 100) {
-            throw new IllegalArgumentException("Значение frequency должно быть больше 0 и меньше 100 ");
+            throw new IllegalArgumentException("Значение frequency должно быть больше 0 и меньше или равно 100 ");
         }
     }
 
