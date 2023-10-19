@@ -40,7 +40,8 @@ public class Promo {
         while (this.customersQueue.size() > 0) {
             PromotionalToy prize = getPrizeToy();
             if (prize != null) {
-                String message = this.customersQueue.poll().toString() + " выиграл Приз №" + prize.getId() + " - " + prize.getName();
+                String message = this.customersQueue.poll().toString() + " выиграл Приз №" + prize.getId() + " - "
+                        + prize.getName();
                 System.out.println(message);
                 fm.addToFile("Winners.txt", message);
             } else {
@@ -52,7 +53,7 @@ public class Promo {
 
     /**
      * Метод получает рандомный экземпляр PromotionalToy из массива призов. Массив
-     * призов создается используя экземпляры коллекции 
+     * призов создается используя экземпляры коллекции
      * this.promotionalToys с помощью метода createPrizeTable()
      * 
      * @return Экземпляр PromotionalToy (приз)
@@ -90,14 +91,14 @@ public class Promo {
      * @return массив призов (экземпляров PromotionalToy)
      */
     private PromotionalToy[] createPrizeTable() {
-		if (!checkFrequencySum()) {
+        if (!checkFrequencySum()) {
             throw new ArrayIndexOutOfBoundsException(
                     "Сумма frequency всех экземпляров игрушек в розыгрыше привышает 100");
         }
         int size = 100;
         int index = 0;
         int count;
-		PromotionalToy[] prizes = new PromotionalToy[size];
+        PromotionalToy[] prizes = new PromotionalToy[size];
         for (PromotionalToy toy : promotionalToys) {
             count = toy.getFrequency();
             while (count > 0) {
