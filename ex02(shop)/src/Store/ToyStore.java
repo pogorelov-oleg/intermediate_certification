@@ -1,10 +1,8 @@
 package Store;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.PriorityQueue;
 
-import Data.FileManager;
 import Models.Customer;
 import Models.Toys.PromotionalToy;
 import Models.Toys.Toy;
@@ -19,29 +17,6 @@ public class ToyStore {
     public ToyStore() {
         this.toys = new ArrayList<>();
         this.customersQueue = new PriorityQueue<>();
-    }
-
-    /**
-     * Метод запускает розыгрыш призов. Из очереди customersQueue берется
-     * покупатель, разыгрывается подарок и покупатель уходит из очереди. Победители
-     * логируются в файл.
-     */
-    public void runPromo() {
-        Date date = new Date();
-        FileManager fm = new FileManager();
-        fm.addToFile("Winners.txt", date.toString() + "\n");
-        Promo promo = new Promo(this); // Создаю экземпляр промо акции "Розыгрыш игрушек"
-        while (this.customersQueue.size() > 0) {
-            PromotionalToy prize = promo.getPrizeToy();
-            if (prize != null) {
-                String message = this.customersQueue.poll().toString() + " - " + prize.getId() + " " + prize.getName();
-                System.out.println(message);
-                fm.addToFile("Winners.txt", message);
-            } else {
-                System.out.println(this.customersQueue.poll().toString() + " - \u001B[31mНичего не выиграл\u001B[0m");
-            }
-        }
-        fm.addToFile("Winners.txt", "___________________________________________________________________");
     }
 
     /**
@@ -65,6 +40,10 @@ public class ToyStore {
 
     public ArrayList<Toy> getToys() {
         return this.toys;
+    }
+
+    public PriorityQueue<Customer> getCustomersQueue() {
+        return customersQueue;
     }
 
     @Override

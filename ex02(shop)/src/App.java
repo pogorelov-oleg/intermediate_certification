@@ -1,6 +1,7 @@
 import Models.Customer;
 import Models.Toys.PromotionalToy;
 import Models.Toys.Toy;
+import Store.Promo;
 import Store.ToyStore;
 
 public class App {
@@ -23,7 +24,8 @@ public class App {
         toyStore.putCustomer(new Customer("Ксения", "Никитина"));
         toyStore.putCustomer(new Customer("Михаил", "Бублик"));
 
-        toyStore.runPromo();
+        Promo promo = new Promo(toyStore);
+        promo.runPromo();
 
         System.out.println();
         System.out.println(toyStore);

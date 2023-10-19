@@ -1,8 +1,12 @@
 package Store;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.PriorityQueue;
 import java.util.Random;
 
+import Data.FileManager;
+import Models.Customer;
 import Models.Toys.PromotionalToy;
 import Models.Toys.Toy;
 
@@ -11,14 +15,39 @@ import Models.Toys.Toy;
  */
 public class Promo {
     private ArrayList<PromotionalToy> promotionalToys;
+    private PriorityQueue<Customer> customersQueue;
 
     public Promo(ToyStore toystore) {
         this.promotionalToys = new ArrayList<>();
+        this.customersQueue = toystore.getCustomersQueue();
+
         for (Toy toy : toystore.getToys()) {
             if (toy instanceof PromotionalToy) {
                 this.promotionalToys.add((PromotionalToy) toy);
             }
         }
+    }
+
+    /**
+     * Метод запускает розыгрыш призов. Из очереди customersQueue берется
+     * покупатель, разыгрывается подарок и покупатель уходит из очереди. Победители
+     * логируются в файл.
+     */
+    public void runPromo() {
+        Date date = new Date();
+        FileManager fm = new FileManager();
+        fm.addToFile("Winners.txt", date.toString() + "\n");
+        while (this.customersQueue.size() > 0) {
+            PromotionalToy prize = getPrizeToy();
+            if (prize != null) {
+                String message = this.customersQueue.poll().toString() + " выиграл Приз №" + prize.getId() + " - " + prize.getName();
+                System.out.println(message);
+                fm.addToFile("Winners.txt", message);
+            } else {
+                System.out.println(this.customersQueue.poll().toString() + "\u001B[31m Ничего не выиграл\u001B[0m");
+            }
+        }
+        fm.addToFile("Winners.txt", "___________________________________________________________________");
     }
 
     /**
