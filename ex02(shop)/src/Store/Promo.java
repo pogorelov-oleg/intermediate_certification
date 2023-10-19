@@ -52,7 +52,7 @@ public class Promo {
 
     /**
      * Метод получает рандомный экземпляр PromotionalToy из массива призов. Массив
-     * призов создается из коллекции
+     * призов создается используя экземпляры коллекции 
      * this.promotionalToys с помощью метода createPrizeTable()
      * 
      * @return Экземпляр PromotionalToy (приз)
