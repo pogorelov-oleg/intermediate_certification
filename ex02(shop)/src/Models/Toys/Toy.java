@@ -5,11 +5,9 @@ package Models.Toys;
  */
 public class Toy implements Comparable<Toy> {
     private int id;
-
+    private static int generalId; // Общий статический ID
     private String name;
     private int count;
-
-    private static int generalId; // Общий статический ID
 
     public Toy(String name, int count) {
         generalId++;
