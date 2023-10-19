@@ -90,20 +90,20 @@ public class Promo {
      * @return массив призов (экземпляров PromotionalToy)
      */
     private PromotionalToy[] createPrizeTable() {
-        int size = 100;
-        if (!checkFrequencySum()) {
+		if (!checkFrequencySum()) {
             throw new ArrayIndexOutOfBoundsException(
                     "Сумма frequency всех экземпляров игрушек в розыгрыше привышает 100");
         }
-        PromotionalToy[] prizes = new PromotionalToy[size];
+        int size = 100;
         int index = 0;
-        int frequency;
+        int count;
+		PromotionalToy[] prizes = new PromotionalToy[size];
         for (PromotionalToy toy : promotionalToys) {
-            frequency = toy.getFrequency();
-            while (frequency > 0) {
+            count = toy.getFrequency();
+            while (count > 0) {
                 if (prizes[index] == null) {
                     prizes[index] = toy;
-                    frequency--;
+                    count--;
                     index++;
                 }
             }
